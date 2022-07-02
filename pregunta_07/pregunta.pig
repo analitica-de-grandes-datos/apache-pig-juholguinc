@@ -21,7 +21,7 @@ Data_ = LOAD 'data.tsv' USING PigStorage('\t')
         f3:chararray
      );
 
-step1 = FOREACH Data_07 GENERATE f1, TOKENIZE(f2, ',') AS f21, TOKENIZE(f3, ',') AS f31;
+step1 = FOREACH Data_ GENERATE f1, TOKENIZE(f2, ',') AS f21, TOKENIZE(f3, ',') AS f31;
 step2 = FOREACH step1 GENERATE f1, COUNT(f21) AS f22, COUNT(f31) AS f32;
 step3 = ORDER step2 BY f1, f22, f32 asc;
 STORE step3 INTO 'output' USING PigStorage(',');
