@@ -30,6 +30,6 @@ Data_ = LOAD 'data.csv' USING PigStorage(',')
       );
 
 step1 = FOREACH Data_ GENERATE name, color;
-step2 = FILTER step1 BY (name MATCHES '.*^[zZ].*') AND color == 'blue';
-STORE step2 INTO 'output' USING PigStorage(' ');
+step2 = FILTER step1 BY (name MATCHES '.*^[kK].*') OR (color == 'blue');
+STORE step2 INTO 'output' USING PigStorage(',');
 
