@@ -24,5 +24,5 @@ Data_ = LOAD 'data.csv' USING PigStorage(',')
     );
 
 step1 = GROUP Data_ BY GetYear(date);
-count_31 = FOREACH step1 GENERATE group, COUNT(Data_31);
-STORE count_31 INTO 'output' USING PigStorage(',');
+count_ = FOREACH step1 GENERATE group, COUNT(Data_);
+STORE count_ INTO 'output' USING PigStorage(',');
