@@ -22,4 +22,15 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+Data_ = LOAD 'data.csv' USING PigStorage(',')
+    AS(
+        id:int,
+        name:chararray,
+        lsname:chararray,
+        date:chararray,
+        color:chararray,
+        number:int
+      );
 
+step1 = FOREACH Data_ GENERATE SUBSTRING(date,0,4) AS year4, SUBSTRING(date,2,4) AS year2;
+STORE step1 INTO 'output' USING PigStorage(',');

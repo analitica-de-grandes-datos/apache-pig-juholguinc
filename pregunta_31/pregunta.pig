@@ -13,4 +13,16 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+Data_ = LOAD 'data.csv' USING PigStorage(',')
+    AS(
+        id:int,
+        name:chararray,
+        lsname:chararray,
+        date:datetime,
+        color:chararray,
+        number:int
+    );
 
+step1 = GROUP Data_ BY GetYear(date);
+count_ = FOREACH step1 GENERATE group, COUNT(Data_);
+STORE count_ INTO 'output' USING PigStorage(',');
